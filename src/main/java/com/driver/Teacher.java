@@ -11,4 +11,8 @@ public class Teacher {
     public Teacher() {
 
     }
+
+    public String getName(){
+        return this.name;
+    }
 }
