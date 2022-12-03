@@ -1,14 +1,22 @@
 package com.driver;
 
+import org.springframework.stereotype.Repository;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+@Repository
 public class StudentRepository {
+    public StudentRepository() {
+        this.students = new HashMap<String, Student>();
+        this.teachers = new HashMap<String, Teacher>();
+        this.student_teacher_pair = new HashMap<String, List<String>>();
+    }
 
-    HashMap<String, Student> students = new HashMap<>();
-    HashMap<String, Teacher> teachers = new HashMap<>();
-    HashMap<String, ArrayList<String>> student_teacher_pair = new HashMap<>();
+    private HashMap<String, Student> students;
+    private HashMap<String, Teacher> teachers;
+    private HashMap<String, List<String>> student_teacher_pair;
 
     public List<String> getAllStudents() {
         List<String> list = new ArrayList<>();
@@ -19,8 +27,8 @@ public class StudentRepository {
         return list;
     }
 
-    public ArrayList<String> getStudentsByTeacherName(String teacher) {
-        ArrayList<String> students = student_teacher_pair.get(teacher);
+    public List<String> getStudentsByTeacherName(String teacher) {
+        List<String> students = student_teacher_pair.get(teacher);
         return students;
     }
 
@@ -42,7 +50,7 @@ public class StudentRepository {
     }
 
     public void addStudentTeacherPair(String student, String teacher) {
-        ArrayList<String> list;
+        List<String> list;
         list = student_teacher_pair.get(teacher);
         list.add(student);
         student_teacher_pair.put(teacher, list);
